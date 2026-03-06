@@ -1,0 +1,394 @@
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: linear-gradient(120deg,#0f172a,#1e293b);
+    font-family:Arial;
+    overflow-y:auto;
+}
+
+/* ANIMACION */
+
+@keyframes aparecer{
+
+from{
+opacity:0;
+transform:translateY(40px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+/* TARJETA LOGIN */
+
+.card-login{
+
+background:#1e293b;
+border:none;
+border-radius:15px;
+padding:35px;
+width:350px;
+box-shadow:0px 10px 30px rgba(0,0,0,0.6);
+animation: aparecer 1s ease;
+
+}
+
+.card-login h2{
+
+color:white;
+margin-bottom:25px;
+
+}
+
+/* INPUTS */
+
+.form-control{
+
+background:#0f172a;
+border:none;
+color:white;
+
+}
+
+.form-control::placeholder{
+
+color:#9ca3af;
+
+}
+
+.form-control:focus{
+
+background:#0f172a;
+color:white;
+box-shadow:none;
+border:1px solid #facc15;
+
+}
+
+/* BOTON LOGIN */
+
+.btn-login{
+
+background:#facc15;
+color:black;
+font-weight:bold;
+
+}
+
+.btn-login:hover{
+
+background:#eab308;
+
+}
+
+/* BOTONES CENTRADOS */
+
+.bottom-buttons{
+
+position:absolute;
+bottom:30px;
+width:100%;
+text-align:center;
+
+}
+
+.btn-menu{
+
+background:#334155;
+color:white;
+border:none;
+padding:10px 20px;
+margin:5px;
+border-radius:8px;
+transition:0.3s;
+
+}
+
+.btn-menu:hover{
+
+background:#475569;
+
+}
+
+/* BOTON SALIR */
+
+.btn-salir{
+
+position:absolute;
+bottom:20px;
+left:20px;
+background:#ef4444;
+border:none;
+color:white;
+padding:8px 16px;
+border-radius:8px;
+
+}
+
+.btn-salir:hover{
+
+background:#dc2626;
+
+}
+/* LOGOS */
+
+.logos{
+position:absolute;
+top:20px;
+width:100%;
+}
+
+.logo-izq{
+position:absolute;
+left:20px;
+height:200px;
+}
+
+.logo-der{
+position:absolute;
+right:20px;
+height:200px;
+}
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background: linear-gradient(120deg,#0f172a,#1e293b);
+font-family:'Poppins', sans-serif;
+color:white;
+overflow-y:auto;
+}
+
+/* TITULOS */
+
+h1{
+font-weight:600;
+letter-spacing:2px;
+}
+
+h3{
+font-weight:400;
+}
+
+p{
+color:#e2e8f0;
+}
+
+/* TARJETA */
+
+.card-login{
+background:#1e293b;
+border:none;
+border-radius:15px;
+padding:40px;
+width:420px;
+box-shadow:0px 10px 30px rgba(0,0,0,0.6);
+text-align:center;
+animation: aparecer 1s ease;
+}
+
+/* FUENTE GENERAL */
+
+body{
+height:100vh;
+background: linear-gradient(120deg,#0f172a,#1e293b);
+font-family:'Poppins', sans-serif;
+color:white;
+overflow-y:auto;
+}
+
+/* ANIMACION */
+
+@keyframes aparecer{
+
+from{
+opacity:0;
+transform:translateY(40px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+/* TARJETA */
+
+.card-login{
+
+background:#1e293b;
+border-radius:15px;
+padding:40px;
+width:500px;
+box-shadow:0px 10px 30px rgba(0,0,0,0.6);
+animation: aparecer 1s ease;
+
+}
+
+/* BOTON */
+
+.btn-login{
+
+background:#facc15;
+color:black;
+font-weight:bold;
+
+}
+
+.btn-login:hover{
+
+background:#eab308;
+
+}
+
+
+
+
+/* FOTOS */
+
+.foto{
+
+width:180px;
+border-radius:15px;
+border:3px solid #facc15;
+margin-top:10px;
+transition:0.3s;
+
+}
+
+.foto:hover{
+
+transform:scale(1.05);
+
+}
+/* CONTENEDOR DE LOGOS */
+
+.logos{
+position:absolute;
+top:20px;
+width:100%;
+}
+
+.logo-izq{
+position:absolute;
+top:20px;
+left:25px;
+height:120px;   /* antes estaba como 80px */
+padding:8px;
+background:rgba(255,255,255,0.08);
+border-radius:12px;
+box-shadow:0 6px 15px rgba(0,0,0,0.5);
+transition:transform 0.3s, box-shadow 0.3s;
+cursor:pointer;
+}
+
+/* LOGO DERECHO */
+
+.logo-der{
+position:absolute;
+top:20px;
+right:25px;
+height:120px;   /* antes estaba como 80px */
+padding:8px;
+background:rgba(255,255,255,0.08);
+border-radius:12px;
+box-shadow:0 6px 15px rgba(0,0,0,0.5);
+transition:transform 0.3s, box-shadow 0.3s;
+cursor:pointer;
+}
+
+/* EFECTO HOVER */
+
+.logo-izq:hover,
+.logo-der:hover{
+transform:scale(1.15);
+box-shadow:0 12px 30px rgba(0,0,0,0.7);
+}
+
+.card-principal{
+
+background: rgba(0,0,0,0.7);
+padding:40px;
+border-radius:15px;
+box-shadow:0 0 25px rgba(0,0,0,0.5);
+
+}
+
+.titulo{
+
+text-align:center;
+font-weight:bold;
+
+}
+
+.preview{
+
+width:300px;
+height:300px;
+background:#111;
+border-radius:10px;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+margin:auto;
+
+}
+
+.preview img{
+
+max-width:100%;
+max-height:100%;
+
+}
+
+.ruta{
+
+font-size:13px;
+margin-top:5px;
+color:#ccc;
+
+}
+.alerta-personalizada{
+
+display:none;
+padding:15px;
+margin-top:15px;
+border-radius:10px;
+font-weight:bold;
+text-align:center;
+color:white;
+
+}
+
+.alerta-exito{
+background:#198754;
+}
+
+.alerta-error{
+background:#dc3545;
+}
+
+.alerta-info{
+background:#0dcaf0;
+color:black;
+}
+body {
+    background: #0b1220;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+}
+
+.container{
+padding-bottom:50px;
+}

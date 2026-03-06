@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<title>Base de datos de enfermedades</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/estilos.css">
+
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+<div class="card-principal">
+
+<h2 class="titulo text-center">Base de datos de enfermedades</h2>
+
+<!-- ALERTA -->
+<div id="alerta" class="alert text-center mt-3 d-none"></div>
+
+<div class="row mt-4">
+
+<!-- FORMULARIO -->
+<div class="col-md-6">
+
+<label class="form-label">Nombre de la enfermedad</label>
+<input type="text" id="nombre" class="form-control mb-3">
+
+<label class="form-label">Descripción</label>
+<textarea id="descripcion" class="form-control mb-3" rows="4"></textarea>
+
+<label class="form-label">Imagen</label>
+<input type="file" id="imagen" name="imagen" class="form-control mb-3" accept="image/*" onchange="mostrarImagen()">
+
+<div id="ruta" class="ruta"></div>
+
+</div>
+
+<!-- PREVIEW -->
+<div class="col-md-6 text-center">
+
+<div class="preview">
+<img id="previewImg">
+</div>
+
+</div>
+
+</div>
+
+<hr class="mt-4">
+
+<!-- RESULTADO INDIVIDUAL GRANDE -->
+<div id="resultado" class="mt-4 text-center">
+
+<h2 id="resNombre" class="titulo"></h2>
+
+<p id="resDescripcion" style="font-size:18px"></p>
+
+<img id="resImagen" class="img-fluid mt-3" style="max-width:300px">
+
+</div>
+
+<hr class="mt-4">
+
+<!-- BOTONES -->
+<div class="text-center mt-4">
+
+<button class="btn btn-success m-1" onclick="alta()">Alta</button>
+
+<button class="btn btn-danger m-1" onclick="baja()">Baja</button>
+
+<button class="btn btn-info m-1" onclick="consultarIndividual()">Consultar Individual</button>
+
+<button class="btn btn-primary m-1" onclick="consultarGeneral()">Consultar General</button>
+
+<button class="btn btn-secondary m-1"
+onclick="window.location.href='panel_experto.html'">
+Regresar
+</button>
+
+</div>
+
+<!-- LISTA GENERAL -->
+<div id="listaEnfermedades" class="mt-4"></div>
+
+</div>
+</div>
+
+<script>
+
+/* LIMPIAR RESULTADOS */
+
+function limpiarResultados(){
+
+document.getElementById("listaEnfermedades").innerHTML = "";
+
+document.getElementById("resNombre").innerText = "";
+document.getElementById("resDescripcion").innerText = "";
+document.getElementById("resImagen").src = "";
+
+
+}
+function limpiarFormulario(){
+
+document.getElementById("nombre").value = "";
+document.getElementById("descripcion").value = "";
+document.getElementById("imagen").value = "";
+
+document.getElementById("previewImg").src = "";
+document.getElementById("ruta").innerText = "";
+
+}
+
+
+/* ALERTA */
+
+function mostrarAlerta(mensaje,tipo){
+
+let alerta = document.getElementById("alerta");
+
+alerta.className = "alert text-center mt-3";
+
+if(tipo=="error"){
+alerta.classList.add("alert-danger");
+}
+
+if(tipo=="success"){
+alerta.classList.add("alert-success");
+}
+
+if(tipo=="info"){
+alerta.classList.add("alert-info");
+}
+
+alerta.innerText = mensaje;
+alerta.classList.remove("d-none");
+
+setTimeout(()=>{
+alerta.classList.add("d-none");
+},3000);
+
+}
+
+
+/* MOSTRAR IMAGEN */
+
+function mostrarImagen(){
+
+let archivo = document.getElementById("imagen").files[0];
+
+if(!archivo) return;
+
+let lector = new FileReader();
+
+lector.onload=function(e){
+
+document.getElementById("previewImg").src = e.target.result;
+
+}
+
+lector.readAsDataURL(archivo);
+
+document.getElementById("ruta").innerText = "Ruta: "+archivo.name;
+
+}
+
+
+/* ALTA */
+
+function alta(){
+limpiarResultados();
+let nombre = document.getElementById("nombre").value;
+let descripcion = document.getElementById("descripcion").value;
+let imagen = document.getElementById("imagen").files[0];
+
+if(nombre==""){
+mostrarAlerta("Ingrese el nombre","error");
+return;
+}
+
+let datos = new FormData();
+
+datos.append("nombre",nombre);
+datos.append("descripcion",descripcion);
+datos.append("imagen",imagen);
+
+fetch("guardar_enfermedad.php",{
+
+method:"POST",
+body:datos
+
+})
+
+.then(res=>res.text())
+
+.then(data=>{
+
+if(data=="ok"){
+
+mostrarAlerta("Enfermedad guardada","success");
+limpiarFormulario();
+limpiarResultados();
+}else{
+
+mostrarAlerta("Error al guardar","error");
+
+}
+
+});
+
+}
+
+
+/* BAJA */
+
+function baja(){
+
+limpiarResultados();
+
+let nombre = document.getElementById("nombre").value;
+
+if(nombre==""){
+mostrarAlerta("Ingrese el nombre de la enfermedad","error");
+return;
+}
+
+let datos = new FormData();
+
+datos.append("nombre",nombre);
+
+fetch("baja_enfermedad.php",{
+
+method:"POST",
+body:datos
+
+})
+
+.then(res=>res.text())
+
+.then(data=>{
+
+if(data=="ok"){
+
+mostrarAlerta("Enfermedad eliminada","success");
+
+}else{
+
+mostrarAlerta("No se pudo eliminar","error");
+
+}
+
+});
+
+}
+
+
+/* CONSULTA INDIVIDUAL */
+
+function consultarIndividual(){
+
+limpiarResultados();
+
+let nombre = document.getElementById("nombre").value;
+
+if(nombre==""){
+mostrarAlerta("Ingrese el nombre","error");
+return;
+}
+
+fetch("consultar_enfermedad.php",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/x-www-form-urlencoded"
+},
+
+body:`nombre=${nombre}`
+
+})
+
+.then(res=>res.text())
+
+.then(data=>{
+
+if(data=="no"){
+
+mostrarAlerta("Enfermedad no encontrada","error");
+return;
+
+}
+
+let datos = JSON.parse(data);
+
+document.getElementById("resNombre").innerText = datos.nombre;
+document.getElementById("resDescripcion").innerText = datos.descripcion;
+document.getElementById("resImagen").src = datos.imagen;
+
+});
+
+}
+
+
+/* CONSULTA GENERAL */
+
+function consultarGeneral(){
+
+limpiarResultados();
+
+fetch("consultar_todas.php")
+
+.then(res=>res.json())
+
+.then(datos=>{
+
+let contenedor = document.getElementById("listaEnfermedades");
+
+if(datos.length==0){
+
+mostrarAlerta("No hay enfermedades registradas","error");
+return;
+
+}
+
+datos.forEach(e=>{
+
+contenedor.innerHTML+=`
+
+<div class="card-principal mt-3 p-3">
+
+<div class="row align-items-center">
+
+<div class="col-md-3 text-center">
+<img src="${e.imagen}" class="img-fluid" style="max-height:120px;">
+</div>
+
+<div class="col-md-6">
+
+<h4 class="titulo">${e.nombre}</h4>
+
+<p>${e.descripcion}</p>
+
+</div>
+
+<div class="col-md-3 text-center">
+
+<button class="btn btn-warning mb-2"
+onclick="cargarDatos('${e.nombre}','${e.descripcion}','${e.imagen}')">
+Modificar
+</button>
+
+<button class="btn btn-danger"
+onclick="eliminarDesdeLista('${e.nombre}')">
+Eliminar
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+});
+
+}
+
+
+/* ELIMINAR DESDE LISTA */
+
+function eliminarDesdeLista(nombre){
+
+let datos = new FormData();
+
+datos.append("nombre",nombre);
+
+fetch("baja_enfermedad.php",{
+
+method:"POST",
+body:datos
+
+})
+
+.then(res=>res.text())
+
+.then(data=>{
+
+if(data=="ok"){
+
+mostrarAlerta("Enfermedad eliminada","success");
+
+consultarGeneral();
+
+}else{
+
+mostrarAlerta("No se pudo eliminar","error");
+
+}
+
+});
+
+}
+function cargarDatos(nombre,descripcion,imagen){
+
+document.getElementById("nombre").value = nombre;
+document.getElementById("descripcion").value = descripcion;
+
+document.getElementById("previewImg").src = imagen;
+
+mostrarAlerta("Ahora puedes modificar y presionar Alta para guardar cambios","info");
+
+}
+
+</script>
+
+</body>
+</html>

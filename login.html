@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sistema Experto</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/estilos.css">
+
+</head>
+
+<body>
+
+<!-- LOGOS -->
+<div class="logos">
+
+<img src="img/logo_itz.png" class="logo-izq">
+
+<img src="img/logo2.png" class="logo-der">
+
+</div>
+
+
+<div class="container vh-100 d-flex justify-content-center align-items-center">
+
+<div class="card-login text-center">
+
+<h1>I.T.Z</h1>
+
+<h3>I.A</h3>
+
+<p class="mt-3">
+Sistema Experto para Diagnóstico de Enfermedades
+</p>
+
+<div class="mt-4">
+
+<a href="acerca.html" class="btn btn-menu me-2">
+Acerca de..
+</a>
+
+<a href="menu.html" class="btn btn-login">
+Entrar
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- BOTON SALIR -->
+<button class="btn-salir" onclick="salir()">Salir</button>
+
+
+<script>
+
+function salir(){
+
+if(confirm("¿Deseas salir del sistema?")){
+window.open('', '_self');
+window.close();
+}
+
+}
+
+</script>
+
+</body>
+</html>
+

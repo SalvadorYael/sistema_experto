@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Interfaz Experto</title>
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Iconos -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+<!-- Fuente -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/estilos.css">
+
+</head>
+
+<body>
+
+
+
+<div class="container vh-100 d-flex justify-content-center align-items-center">
+
+<div class="card-login text-center">
+
+<h2>Acceso Experto</h2>
+
+<hr style="color:white">
+
+<div class="mb-3">
+
+<input type="text" id="usuario" class="form-control" placeholder="Usuario">
+
+</div>
+
+<div class="mb-3">
+
+<input type="password" id="password" class="form-control" placeholder="Contraseña">
+
+</div>
+
+<button onclick="verificar()" class="btn btn-login w-100">
+Ingresar
+</button>
+
+<br><br>
+
+<a href="menu.html" class="btn btn-menu">
+Regresar
+</a>
+
+</div>
+
+</div>
+
+
+<script>
+
+function verificar(){
+
+let usuario = document.getElementById("usuario").value;
+let password = document.getElementById("password").value;
+
+if(usuario === "experto" && password === "1234"){
+
+Swal.fire({
+title: "Acceso correcto",
+text: "Bienvenido al panel del experto",
+icon: "success",
+confirmButtonColor: "#facc15",
+background: "#1e293b",
+color: "#ffffff"
+}).then(() => {
+
+window.location.href = "panel_experto.html";
+
+});
+
+}else{
+
+Swal.fire({
+title: "Error",
+text: "Vuelva a intentarlo",
+icon: "error",
+confirmButtonColor: "#facc15",
+background: "#1e293b",
+color: "#ffffff"
+});
+
+}
+
+}
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>
+
